@@ -1,0 +1,33 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "mgsfan/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "mgsfan/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "mgsfan/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "mgsfan/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        { "hostPort": 80, "containerPort": 80 }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
